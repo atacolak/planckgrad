@@ -44,6 +44,10 @@ class MLP:
         return pred
     
     def train(self, input, desired_output, epochs: int, step_size: int):
+        input_size = len(self.layers[0].neurons[0].w)
+        for x in input:
+            assert len(x) == input_size, \
+                f"Expected input size {input_size}, got {len(x)}"  
         for i in range(epochs):
             preds = [self(x) for x in input]
             n_preds = []
